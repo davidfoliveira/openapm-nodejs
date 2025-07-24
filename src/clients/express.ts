@@ -13,7 +13,7 @@ export const instrumentExpress = (
 ) => {
   const routerProto = express.Router as unknown as Express.Router['prototype'];
 
-  wrap(routerProto.prototype, 'use', (original) => {
+  wrap(routerProto.use ? routerProto : routerProto.prototype, 'use', (original) => {
     return function wrappedUse(
       this: typeof original,
       ...args: Parameters<typeof original>
