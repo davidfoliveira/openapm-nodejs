@@ -23,7 +23,7 @@ function _interopNamespace(e) {
 var os__namespace = /*#__PURE__*/ _interopNamespace(os);
 var instrumentExpress = function(express, redMiddleware, openapm) {
     var routerProto = express.Router;
-    shimmer.wrap(routerProto.prototype, "use", function(original) {
+    shimmer.wrap(routerProto.use ? routerProto : routerProto.prototype, "use", function(original) {
         return function wrappedUse() {
             for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++){
                 args[_key] = arguments[_key];

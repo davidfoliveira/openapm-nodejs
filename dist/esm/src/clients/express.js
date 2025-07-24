@@ -2,7 +2,7 @@ import * as os from "os";
 import { wrap, isWrapped } from "../shimmer";
 var instrumentExpress = function(express, redMiddleware, openapm) {
     var routerProto = express.Router;
-    wrap(routerProto.prototype, "use", function(original) {
+    wrap(routerProto.use ? routerProto : routerProto.prototype, "use", function(original) {
         return function wrappedUse() {
             for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++){
                 args[_key] = arguments[_key];
